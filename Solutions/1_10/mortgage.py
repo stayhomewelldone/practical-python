@@ -23,6 +23,9 @@ while principal > 0:
     
 print('Total paid', round(total_paid, 2))
 print('Months', month)
+#Exercise 1.12: A Mystery
+# It returns true because it evaluates that the string value between the parentheses is an boolean value. 
+
 
 
 
