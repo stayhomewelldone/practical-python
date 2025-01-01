@@ -24,10 +24,10 @@ while principal > 0:
     total_months = total_months + 1
     total_paid = total_paid + payment
 
-    print(total_months, round(total_paid, 2),round(principal, 2))
+    print(f'{total_months} {round(total_paid, 2)} {round(principal, 2)}')
     
-print('Total paid', round(total_paid,2))
-print("Total months", total_months)
+print(f'Total paid ${round(total_paid,2)}')
+print(f'Months {total_months}')
 print('\nhello')
 #Exercise 1.12: A Mystery
 # It returns true because it evaluates that there is an value between the parentheses. 
@@ -36,4 +36,10 @@ print('\nhello')
 # Exercise 1.14 done
 # symbols.replace('GOOG', ',GOOG')
 # symbols =  'HPQ,' + symbols
-# 
+# Exercise 1.15
+# >>> 'CAT' in symbols
+# False
+# Why did the check for 'AA' return True?
+# Because 'AA" occurs in the string. 
+#Exercise 1.16 done
+
