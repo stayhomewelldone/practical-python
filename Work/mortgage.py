@@ -51,7 +51,7 @@ print('\nhello')
 #symlist.index('YHOO')
 #Exercise 1.23 done
 
-#
-#
+#Exercise 1.24 done
+#Exercise 1.25
 #
 #
