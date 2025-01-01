@@ -42,4 +42,16 @@ print('\nhello')
 # Why did the check for 'AA' return True?
 # Because 'AA" occurs in the string. 
 #Exercise 1.16 done
+#Exercise 1.17 done
+#Exercise 1.22 done
+#symlist.append('RHT')
+#symlist.insert(1, 'AA')
+#symlist.remove('MSFT')
+#symlist.append('YHOO')
+#symlist.index('YHOO')
+#Exercise 1.23 done
 
+#
+#
+#
+#
