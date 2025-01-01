@@ -28,3 +28,12 @@ while principal > 0:
     
 print('Total paid', round(total_paid,2))
 print("Total months", total_months)
+print('\nhello')
+#Exercise 1.12: A Mystery
+# It returns true because it evaluates that there is an value between the parentheses. 
+
+# Exercise 1.13 done
+# Exercise 1.14 done
+# symbols.replace('GOOG', ',GOOG')
+# symbols =  'HPQ,' + symbols
+# 
