@@ -1,17 +1,17 @@
 # pcost.py
 #
 # Exercise 1.27
-
+import csv
 def portfolio_cost(filename):
     
     with open(filename, 'rt') as f:
-        headers = next(f)
+        rows = csv.reader(f)
+        headers = next(rows)
         total_cost = 0
-        for line in f: 
+        for line in rows: 
             
-                row = line.split(',')
                 try: 
-                    total_cost += (int(row[1]) * float(row[2]))
+                    total_cost += (int(line[1]) * float(line[2]))
                 except ValueError:
                      print("Couldn't parse", line)
         return round(total_cost,2)
@@ -23,4 +23,5 @@ print(f'Total cost {cost}')
 #Exercise 1.29 done
 #Exercise 1.30 done
 #Exercise 1.31 done
+#Exercise 132 done
 
