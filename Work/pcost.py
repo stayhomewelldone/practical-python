@@ -11,3 +11,6 @@ with open('Data/portfolio.csv', 'rt') as f:
 
 
 print(f'Total cost {round(total_cost,2 )}')
+
+#Exercise 1.29 done
+

@@ -54,4 +54,3 @@ print('\nhello')
 #Exercise 1.24 done
 #Exercise 1.25
 #
-#
