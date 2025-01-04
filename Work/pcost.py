@@ -4,17 +4,21 @@
 import csv
 import sys
 def portfolio_cost(filename):
+    'Computes the total cost (shares*price) of a portfolio file'
     
     with open(filename, 'rt') as f:
+     
         rows = csv.reader(f)
         headers = next(rows)
-        total_cost = 0
-        for line in rows: 
+        total_cost = 0.0
+        for row in rows: 
             
-                try: 
-                    total_cost += (int(line[1]) * float(line[2]))
+                try:
+                    nshares = int(row[1])
+                    price = float(row[2])
+                    total_cost += nshares * price
                 except ValueError:
-                     print("Couldn't parse", line)
+                     print("Couldn't parse", row)
         return round(total_cost,2)
 if len(sys.argv) == 2:
      filename = sys.argv[1]
