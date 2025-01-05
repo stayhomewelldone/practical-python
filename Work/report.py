@@ -9,19 +9,41 @@ def read_portfolio(filename):
      
         rows = csv.reader(f)
         headers = next(rows)
-        portfolio = [] # Initial, list of dicts
+        portfolio = {} # Initial, list of dicts
         for row in rows: 
-           
+                print(row)
                 try:
-                     holding = {'name': row[0],"share": int(row[1]), 'price': float(row[2]) } 
-                     portfolio.append(holding)
+                     portfolio[row[0]] = float(row[1]) 
                 except ValueError:
                      print("Couldn't parse", row)
+                except IndexError as e:
+                     print(f'Indexerror occured:{e}')
+               
         return portfolio
+def read_prices(filename):
+    'Read the contents of prices, and returns a dict'
+    with open(filename, 'rt') as f:
+     
+        rows = csv.reader(f)
+        headers = next(rows)
+        prices = {} # Initial dict
+        for row in rows: 
+                print(row)
+                try:
+                     prices[row[0]] = float(row[1]) 
+                except ValueError:
+                     print("Couldn't parse", row)
+                except IndexError as e:
+                     print(f'Indexerror occured:{e}')
+               
+        return prices
 if len(sys.argv) == 2:
      filename = sys.argv[1]
 else:
-     filename = ('Data/portfolio.csv')
-portfolio = read_portfolio(filename)
+     filename = ('Data/prices.csv')
+# portfolio = read_portfolio(filename)
+prices = read_prices(filename)
 
-print(f'Portfolio dict {portfolio}')
+
+# print(f'Portfolio dict {portfolio}')
+print(f'Prices dict {prices}')
