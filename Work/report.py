@@ -9,12 +9,12 @@ def read_portfolio(filename):
      
         rows = csv.reader(f)
         headers = next(rows)
-        portfolio = []
+        portfolio = [] # Initial, list of dicts
         for row in rows: 
-            
-                try: 
-                    holding = (row[0], int(row[1]), float(row[2]) )
-                    portfolio.append(holding)
+           
+                try:
+                     holding = {'name': row[0],"share": int(row[1]), 'price': float(row[2]) } 
+                     portfolio.append(holding)
                 except ValueError:
                      print("Couldn't parse", row)
         return portfolio
@@ -24,4 +24,4 @@ else:
      filename = ('Data/portfolio.csv')
 portfolio = read_portfolio(filename)
 
-print(f'Portfolio list {portfolio}')
+print(f'Portfolio dict {portfolio}')
