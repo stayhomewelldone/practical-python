@@ -41,7 +41,7 @@ def calculate_current_portfolio(prices, portfolio):
      'Calculates and returns the current portfolio value'
      current_portfolio = []
      for row in portfolio:
-          if row['name'] in prices:
+          
                row['gain/loss'] = round(prices[row['name']] - row['price'] ,2)
                row['price'] = prices[row['name']]
                current_portfolio.append(row)
