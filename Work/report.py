@@ -3,17 +3,18 @@
 # Exercise 2.4
 import csv
 import sys
+from pprint import pprint
 def read_portfolio(filename):
     'Read the contents of a portfolio'
     with open(filename, 'rt') as f:
      
         rows = csv.reader(f)
         headers = next(rows)
-        portfolio = {} # Initial, list of dicts
+        portfolio = [] # Initial, list of dicts
         for row in rows: 
-                print(row)
                 try:
-                     portfolio[row[0]] = float(row[1]) 
+                     holding = {'name': row[0],"share": int(row[1]), 'price': float(row[2]) } 
+                     portfolio.append(holding) 
                 except ValueError:
                      print("Couldn't parse", row)
                 except IndexError as e:
@@ -25,25 +26,40 @@ def read_prices(filename):
     with open(filename, 'rt') as f:
      
         rows = csv.reader(f)
-        headers = next(rows)
         prices = {} # Initial dict
         for row in rows: 
-                print(row)
                 try:
                      prices[row[0]] = float(row[1]) 
                 except ValueError:
                      print("Couldn't parse", row)
                 except IndexError as e:
-                     print(f'Indexerror occured:{e}')
+                     print(f'Indexerror occured on {row}: {e}')
                
         return prices
+    
+def calculate_current_portfolio(prices, portfolio):
+     'Calculates and returns the current portfolio value'
+     current_portfolio = []
+     for row in portfolio:
+          if row['name'] in prices:
+               row['gain/loss'] = round(prices[row['name']] - row['price'] ,2)
+               row['price'] = prices[row['name']]
+               current_portfolio.append(row)
+
+
+     return current_portfolio        
+               
+
 if len(sys.argv) == 2:
-     filename = sys.argv[1]
+     filename_portfolio = sys.argv[1]
+     filename_prices  = sys.argv[2]
+
 else:
-     filename = ('Data/prices.csv')
-# portfolio = read_portfolio(filename)
-prices = read_prices(filename)
-
-
-# print(f'Portfolio dict {portfolio}')
-print(f'Prices dict {prices}')
+     filename = ('Data/portfolio.csv')
+     filename_prices = ('Data/prices.csv')
+portfolio = read_portfolio(filename)
+prices = read_prices(filename_prices)
+current_portfolio = calculate_current_portfolio(prices, portfolio)
+pprint(f' Value of current portfolio: {current_portfolio}')
+# pprint(f'Portfolio list of dict {portfolio}')
+# pprint(f'Prices dict {prices}')
