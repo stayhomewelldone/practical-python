@@ -4,6 +4,8 @@
 import csv
 import sys
 from pprint import pprint
+
+headers = ('Name', 'Shares', 'Price', 'Change')
 def read_portfolio(filename):
     'Read the contents of a portfolio'
     with open(filename, 'rt') as f:
@@ -105,8 +107,11 @@ print()
 pprint(f'Value of current portfolio: {current_value}')
 pprint(f'New value of portfolio:{new_value} ')
 pprint(difference)
-for r in report:
-     print('%10s %10d %10.2f %10.2f' % r)
+# for r in report:
+#      print('%10s %10d %10.2f %10.2f' % r)
+
+print(f'{headers[0]:>10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}')
+print(f'---------- ---------- ---------- -----------')
 for name, shares, price, change in report:
      print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
     
