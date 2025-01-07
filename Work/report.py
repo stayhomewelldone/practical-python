@@ -17,9 +17,7 @@ def read_portfolio(filename):
                      portfolio.append(holding) 
                 except ValueError:
                      print("Couldn't parse", row)
-                except IndexError as e:
-                     print(f'Indexerror occured:{e}')
-               
+                
         return portfolio
 def read_prices(filename):
     'Read the contents of prices, and returns a dict'
