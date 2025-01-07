@@ -105,6 +105,10 @@ print()
 pprint(f'Value of current portfolio: {current_value}')
 pprint(f'New value of portfolio:{new_value} ')
 pprint(difference)
-print(report)
+for r in report:
+     print('%10s %10d %10.2f %10.2f' % r)
+for name, shares, price, change in report:
+     print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+    
 # pprint(f'Portfolio list of dict {portfolio}')
 # pprint(f'Prices dict {prices}')
