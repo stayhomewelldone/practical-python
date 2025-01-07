@@ -66,12 +66,9 @@ def new_value_portfolio(prices, portfolio):
      return new_value
 def make_report(portfolio, prices):
      'To create a visually appealing table, combining data from prices.csv and portfolio.csv'
-     report = [] #list of tuples
-     first_line = ('Name', 'Shares', 'Price', "Change")
-     second_line = ("--------", "--------", "--------", "--------")
-     
+     report = [] #list of tuples     
      for entry in portfolio:
-         tuple_line = (entry['name'], entry['share'],  prices[entry['name']], entry['price'] - prices[entry['name']])
+         tuple_line = (entry['name'], entry['share'],  str(round(prices[entry['name']], 2)), entry['price'] - prices[entry['name']])
          report.append(tuple_line)
 
      return report
@@ -113,7 +110,7 @@ pprint(difference)
 print(f'{headers[0]:>10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}')
 print(f'---------- ---------- ---------- -----------')
 for name, shares, price, change in report:
-     print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+     print(f'{name:>10s} {shares:>10d} {"$" + price:>10} {change:>10.2f}')
     
 # pprint(f'Portfolio list of dict {portfolio}')
 # pprint(f'Prices dict {prices}')
