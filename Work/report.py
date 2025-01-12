@@ -13,12 +13,14 @@ def read_portfolio(filename):
         rows = csv.reader(f)
         headers = next(rows)
         portfolio = [] # Initial, list of dicts
-        for row in rows: 
+        for rowno, row in enumerate(rows, start=1): 
+                record = dict(zip(headers,row ))
+                print(record)
                 try:
-                     holding = {'name': row[0],"share": int(row[1]), 'price': float(row[2]) } 
+                     holding = {'name': record['name'],"share": int(record['shares']), 'price': float(record['price']) } 
                      portfolio.append(holding) 
                 except ValueError:
-                     print("Couldn't parse", row)
+                     print(f'Couldn\'t parse, {row} on line {rowno}')
                 
         return portfolio
 def read_prices(filename):
@@ -27,13 +29,13 @@ def read_prices(filename):
      
         rows = csv.reader(f)
         prices = {} # Initial dict
-        for row in rows: 
+        for rowno, row in enumerate(rows): 
                 try:
                      prices[row[0]] = float(row[1]) 
                 except ValueError:
-                     print("Couldn't parse", row)
+                     print(f'Couldn\'t parse, {row} on line {rowno}')
                 except IndexError as e:
-                     print(f'Indexerror occured on {row}: {e}')
+                     print(f'Indexerror occured {row} on line: {rowno}')
                
         return prices
     
@@ -75,15 +77,12 @@ def make_report(portfolio, prices):
 
 
 
-
-
-
 if len(sys.argv) == 2:
      filename_portfolio = sys.argv[1]
      filename_prices  = sys.argv[2]
 
 else:
-     filename = ('Data/portfolio.csv')
+     filename = ('Data/portfoliodate.csv')
      filename_prices = ('Data/prices.csv')
 portfolio = read_portfolio(filename)
 prices = read_prices(filename_prices)
@@ -114,3 +113,6 @@ for name, shares, price, change in report:
     
 # pprint(f'Portfolio list of dict {portfolio}')
 # pprint(f'Prices dict {prices}')
+
+
+# Exercise 2.16 done.
