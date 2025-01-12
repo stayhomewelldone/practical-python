@@ -11,11 +11,12 @@ def portfolio_cost(filename):
         rows = csv.reader(f)
         headers = next(rows)
         total_cost = 0.0
-        for rowno, row in enumerate(rows): 
-            
+        for rowno, row in enumerate(rows, start=1): 
+                record = dict(zip(headers, row))
+                print(record)
                 try:
-                    nshares = int(row[1])
-                    price = float(row[2])
+                    nshares = int(record['shares'])
+                    price = float(record['price'])
                     total_cost += nshares * price
                 except ValueError:
                      print(f' Row { rowno}: Bad row: {row}')
@@ -34,4 +35,6 @@ print(f'Total cost {cost}')
 #Exercise 1.32 done
 #Exercise 1.33 done
 #Exercise 2.15 done 
+#Exercise 2.16 done
+
 
