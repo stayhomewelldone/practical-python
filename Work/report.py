@@ -15,13 +15,12 @@ def read_portfolio(filename):
         portfolio = [] # Initial, list of dicts
         for rowno, row in enumerate(rows, start=1): 
                 record = dict(zip(headers,row ))
-                print(record)
                 try:
                      holding = {'name': record['name'],"share": int(record['shares']), 'price': float(record['price']) } 
                      portfolio.append(holding) 
                 except ValueError:
                      print(f'Couldn\'t parse, {row} on line {rowno}')
-                
+        print(portfolio)  
         return portfolio
 def read_prices(filename):
     'Read the contents of prices, and returns a dict'
@@ -82,7 +81,7 @@ if len(sys.argv) == 2:
      filename_prices  = sys.argv[2]
 
 else:
-     filename = ('Data/portfoliodate.csv')
+     filename = ('Data/portfolio.csv')
      filename_prices = ('Data/prices.csv')
 portfolio = read_portfolio(filename)
 prices = read_prices(filename_prices)
