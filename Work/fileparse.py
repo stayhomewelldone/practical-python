@@ -3,12 +3,12 @@
 # Exercise 3.3
 import csv
 
-def parse_csv(filename, select=None, types=[str, int, float], has_headers=False):
+def parse_csv(filename, select=None, types=[str, int, float], has_headers=False, delimiter=','):
     '''
     Parse a CSV file into a list of records
     '''
     with open(filename) as f:
-        rows = csv.reader(f)
+        rows = csv.reader(f, delimiter=delimiter)
 
         if has_headers:
         # Read the file headers
@@ -34,7 +34,8 @@ def parse_csv(filename, select=None, types=[str, int, float], has_headers=False)
             # Make a dictionary
             if has_headers:
                 record = dict(zip(headers, row))
-            record = tuple(row)
+            else:
+                record = tuple(row)
             records.append(record)
     
     return records
