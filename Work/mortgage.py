@@ -28,7 +28,6 @@ while principal > 0:
     
 print(f'Total paid ${round(total_paid,2)}')
 print(f'Months {total_months}')
-print('\nhello')
 #Exercise 1.12: A Mystery
 # It returns true because it evaluates that there is an value between the parentheses. 
 
