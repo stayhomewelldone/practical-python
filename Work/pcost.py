@@ -6,22 +6,17 @@ import sys
 from report import read_portfolio
 def portfolio_cost(filename):
     'Computes the total cost (shares*price) of a portfolio file'
-    
-    with open(filename, 'rt') as f:
-     
-        rows = csv.reader(f)
-        headers = next(rows)
-        total_cost = 0.0
-        for rowno, row in enumerate(rows, start=1): 
-                record = dict(zip(headers, row))
-                print(record)
-                try:
-                    nshares = int(record['shares'])
-                    price = float(record['price'])
-                    total_cost += nshares * price
-                except ValueError:
-                     print(f' Row { rowno}: Bad row: {row}')
-        return round(total_cost,2)
+    portfolio = read_portfolio(filename)
+    total_cost = 0.0
+    for rowno, row in enumerate(portfolio, start=1): 
+        print(row)
+        try:
+          nshares = int(row['shares'])
+          price = float(row['price'])
+          total_cost += nshares * price
+        except ValueError:
+          print(f' Row { rowno}: Bad row: {row}')
+    return round(total_cost,2)
 if len(sys.argv) == 2:
      filename = sys.argv[1]
 else:
