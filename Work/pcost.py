@@ -17,15 +17,18 @@ def portfolio_cost(filename):
         except ValueError:
           print(f' Row { rowno}: Bad row: {row}')
     return round(total_cost,2)
-if len(sys.argv) == 2:
-     filename = sys.argv[1]
-else:
-     filename = ('Data/portfolio.csv')
-cost = portfolio_cost(filename)
 
-print(f'Total cost {cost}')
+def main(argv):
+    if len(argv) != 2:
+        raise SystemExit(f'Usage: {argv[0]} ' 'portfile')
+    cost = portfolio_cost(argv[1])
+    print(f'Total cost {cost}')
 
-#Exercise 1.29 done
+    
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)
+#Exercise 1.29 done:
 #Exercise 1.30 done
 #Exercise 1.31 done
 #Exercise 1.32 done
