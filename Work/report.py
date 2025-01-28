@@ -122,10 +122,10 @@ def portfolio_report(portfolio_filename, prices_filename):
 
 def main(argv):
     if len(argv) != 3:
-        raise SystemExit(f'Usage: {argv[0]} ' 'portfile pricefile')
+        raise SystemExit(f'Usage: report.py ' 'portfile pricefile')
     portfolio_report(argv[1], argv[2])
 
-if __name__ == '__main__':
+if __name__ == '__main__':    
     import sys
     main(sys.argv)
 # pprint(f' Value of current portfolio: {current_portfolio}')
