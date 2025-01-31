@@ -8,8 +8,7 @@ def parse_csv(lines, select=None, types=[str, int, float], has_headers=True, del
     '''
     Parse a CSV file into a list of records
     '''
-    x = isinstance(lines, TextIOWrapper)
-    if not x:
+    if isinstance(lines, str):
         lines = open(lines)
     rows = csv.reader(lines, delimiter=delimiter)
 
