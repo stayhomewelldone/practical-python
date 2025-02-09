@@ -7,8 +7,9 @@ from fileparse import parse_csv
 
 def read_portfolio(filename)->list:
      '''Read the contents of a portfolio'''
-     portfolio = parse_csv(filename)
-     return portfolio
+     with open(filename) as lines:
+         portfolio = parse_csv(lines)
+         return portfolio
 
 def read_prices(filename)->dict:
     '''Read the contents of prices, and returns a dict'''
