@@ -5,6 +5,7 @@ import sys
 from pprint import pprint
 from fileparse import parse_csv
 import stock
+from tableformat import TableFormatter
 
 def read_portfolio(filename)->list:
      '''Read the contents of a portfolio'''
@@ -50,11 +51,9 @@ def make_report(portfolio, prices)->list:
 
      return report
 
-def print_report(report):
+def print_report(report, formatter):
      '''Function for printing the report'''
-     headers = ('Name', 'Shares', 'Price', 'Change')
-     print(f'{headers[0]:>10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}')
-     print(('-' * 10 + ' ') * len(headers))
+     formatter.headings(['Name', 'Shares', 'Price', 'Change'])
      for name, shares, price, change in report:
           print(f'{name:>10s} {shares:>10d} {"$" + price:>10} {change:>10.2f}')
 
@@ -87,7 +86,8 @@ def portfolio_report(portfolio_filename, prices_filename):
           difference = f'Loss of {difference}'
      report = make_report(portfolio, prices)
      print_new_value_portfolio(current_value,new_value,difference)
-     print_report(report)
+     formatter = TableFormatter()
+     print_report(report, formatter)
 
 def main(argv):
     if len(argv) != 3:
