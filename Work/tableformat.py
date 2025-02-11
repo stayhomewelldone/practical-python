@@ -1,14 +1,6 @@
 
-def create_formatter(fmt):
-    if fmt == 'txt':
-        formatter = TextTableFormatter()
-    elif fmt == 'csv':
-        formatter = CSVTableFormatter()
-    elif fmt == 'html':
-        formatter = HTMLTableFormatter()
-    else:
-        raise RuntimeError(f'Unknown format {fmt}')
-    return formatter
+
+
 
 class TableFormatter:
     def headings(self, headers):
@@ -70,3 +62,24 @@ class HTMLTableFormatter(TableFormatter):
         for row in rowdata:
             print(f'<td>{row}</td>', end='')
         print('</tr>')
+
+def create_formatter(fmt):
+    if fmt == 'txt':
+        formatter = TextTableFormatter()
+    elif fmt == 'csv':
+        formatter = CSVTableFormatter()
+    elif fmt == 'html':
+        formatter = HTMLTableFormatter()
+    else:
+        raise RuntimeError(f'Unknown format {fmt}')
+    return formatter
+
+def print_table(portfolio, columns=[''], fmt=TextTableFormatter):
+    '''
+    Function for printing the report
+    '''
+    fmt.headings(columns)
+    rowdata=[]
+    for obj in portfolio:
+          rowdata = [ str(getattr(obj,name)) for name in columns ]
+          fmt.row(rowdata)
