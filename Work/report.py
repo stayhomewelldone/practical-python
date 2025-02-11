@@ -74,7 +74,7 @@ def print_new_value_portfolio(current_value,new_value,difference):
      pprint(f'New value of portfolio:{new_value} ')
      pprint(difference)
 
-def portfolio_report(portfolio_filename, prices_filename):
+def portfolio_report(portfolio_filename, prices_filename, fmt='txt'):
      
      portfolio = read_portfolio(portfolio_filename)
      prices = read_prices(prices_filename)
@@ -87,7 +87,7 @@ def portfolio_report(portfolio_filename, prices_filename):
           difference = f'Loss of {difference}'
      report = make_report(portfolio, prices)
      print_new_value_portfolio(current_value,new_value,difference)
-     formatter = tableformat.HTMLTableFormatter()
+     formatter = tableformat.create_formatter(fmt)
      print_report(report, formatter)
 
 def main(argv):
