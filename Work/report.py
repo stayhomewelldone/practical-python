@@ -5,7 +5,7 @@ import sys
 from pprint import pprint
 from fileparse import parse_csv
 import stock
-from tableformat import TableFormatter
+import tableformat
 
 def read_portfolio(filename)->list:
      '''Read the contents of a portfolio'''
@@ -46,7 +46,7 @@ def make_report(portfolio, prices)->list:
      '''To create a visually appealing table, combining data from prices.csv and portfolio.csv'''
      report = [] #list of tuples     
      for index, entry in enumerate(portfolio):
-         tuple_line = (entry.name, entry.shares,  str(round(prices[entry.name], 2)), entry.price- prices[entry.name])
+         tuple_line = (entry.name, entry.shares,  round(prices[entry.name], 2), entry.price- prices[entry.name])
          report.append(tuple_line)
 
      return report
@@ -55,7 +55,8 @@ def print_report(report, formatter):
      '''Function for printing the report'''
      formatter.headings(['Name', 'Shares', 'Price', 'Change'])
      for name, shares, price, change in report:
-          print(f'{name:>10s} {shares:>10d} {"$" + price:>10} {change:>10.2f}')
+          rowdata = [ name, str(shares), f'{price:0.2f}', f'{change:0.2f}' ]
+          formatter.row(rowdata)
 
 def handle_args()->str:
      '''Handle the args passed by executing of the script.'''
@@ -86,7 +87,7 @@ def portfolio_report(portfolio_filename, prices_filename):
           difference = f'Loss of {difference}'
      report = make_report(portfolio, prices)
      print_new_value_portfolio(current_value,new_value,difference)
-     formatter = TableFormatter()
+     formatter = tableformat.HTMLTableFormatter()
      print_report(report, formatter)
 
 def main(argv):
