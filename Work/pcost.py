@@ -11,8 +11,8 @@ def portfolio_cost(filename):
     for rowno, row in enumerate(portfolio, start=1): 
         print(row)
         try:
-          nshares = int(row['shares'])
-          price = float(row['price'])
+          nshares = int(row.shares)
+          price = float(row.price)
           total_cost += nshares * price
         except ValueError:
           print(f' Row { rowno}: Bad row: {row}')

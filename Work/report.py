@@ -4,24 +4,26 @@
 import sys
 from pprint import pprint
 from fileparse import parse_csv
+import stock
 
 def read_portfolio(filename)->list:
      '''Read the contents of a portfolio'''
      with open(filename) as lines:
-         portfolio = parse_csv(lines)
+         portdicts = parse_csv(lines)
+         portfolio = [ stock.Stock(d['name'], d['shares'], d['price']) for d in portdicts]
          return portfolio
 
 def read_prices(filename)->dict:
     '''Read the contents of prices, and returns a dict'''
     prices = parse_csv(filename, types=[str, float], has_headers=False)
-    return prices
+    return dict(prices)
     
 def calculate_current_portfolio(prices, portfolio)->list:
      '''Calculates and returns the current portfolio value'''
      current_portfolio = []
      for row in portfolio:
-               row['gain/loss'] = round(prices[row['name']] - row['price'] ,2)
-               row['price'] = prices[row['name']]
+               row['gain/loss'] = round(prices[row.name] - row.price ,2)
+               row['price'] = prices[row.name]
                current_portfolio.append(row)
      return current_portfolio        
                
@@ -29,21 +31,21 @@ def current_value_portfolio( portfolio):
      '''Calculate the current value of the portfolio''' 
      current_amount = 0
      for entry in portfolio:
-          current_amount += entry['shares'] * entry['price']
+          current_amount += entry.shares * entry.price
      return current_amount
 
 def new_value_portfolio(prices, portfolio):
      '''Calculate new value of portfolio based on the new prices in prices.csv'''
      new_value = 0
      for index, entry in enumerate(portfolio):
-          new_value += entry['shares'] * prices[index][1]
+          new_value += entry.shares * prices[entry.name]
 
      return new_value
 def make_report(portfolio, prices)->list:
      '''To create a visually appealing table, combining data from prices.csv and portfolio.csv'''
      report = [] #list of tuples     
      for index, entry in enumerate(portfolio):
-         tuple_line = (entry['name'], entry['shares'],  str(round(prices[index][1], 2)), entry['price'] - prices[index][1])
+         tuple_line = (entry.name, entry.shares,  str(round(prices[entry.name], 2)), entry.price- prices[entry.name])
          report.append(tuple_line)
 
      return report
@@ -76,7 +78,7 @@ def portfolio_report(portfolio_filename, prices_filename):
      
      portfolio = read_portfolio(portfolio_filename)
      prices = read_prices(prices_filename)
-     current_value = current_value_portfolio(portfolio=portfolio)
+     current_value = current_value_portfolio(portfolio)
      new_value =  new_value_portfolio(prices, portfolio)
      difference  = round(current_value - new_value, 2)
      if new_value > current_value :
