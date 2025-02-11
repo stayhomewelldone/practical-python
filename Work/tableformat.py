@@ -1,7 +1,8 @@
 
 
 
-
+class FormatError(Exception):
+    pass
 class TableFormatter:
     def headings(self, headers):
 
@@ -71,7 +72,7 @@ def create_formatter(fmt):
     elif fmt == 'html':
         formatter = HTMLTableFormatter()
     else:
-        raise RuntimeError(f'Unknown format {fmt}')
+        raise FormatError('Unknown table format %s' % fmt)
     return formatter
 
 def print_table(portfolio, columns=[''], fmt=TextTableFormatter):
